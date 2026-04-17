@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Médico en Casa — Atención Médica Sin Salir de Tu Hogar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #1a5f8a;
+    --teal: #2ab8c4;
+    --azul-oscuro: #0d2d4a;
+    --blanco: #f7f9fb;
+    --gris: #5a6b7c;
+    --sombra: rgba(13,45,74,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: var(--blanco); color: var(--azul-oscuro); overflow-x: hidden; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul) 60%, #1a7aaa 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.4);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-icon { font-size: 5rem; margin-bottom: 1rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 span { color: var(--teal); }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255,255,255,0.88);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .hero-precio {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    color: white;
+  }
+
+  .hero-precio .precio-monto {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+  }
+
+  .hero-precio .precio-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem 2.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+    margin-bottom: 1rem;
+  }
+
+  .hero-cta:hover { transform: translateY(-3px); }
+
+  .hero-garantia {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  /* PROBLEMA */
+  .problema-bg {
+    background: #fff8f0;
+    padding: 4rem 1.5rem;
+    border-bottom: 3px solid #ffe4cc;
+  }
+
+  .problema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 2rem auto 0;
+  }
+
+  .problema-item {
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .problema-item .prob-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+  .problema-item h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #c0392b; margin-bottom: 0.5rem; }
+  .problema-item p { font-size: 0.93rem; color: var(--gris); line-height: 1.6; }
+
+  /* SOLUCIÓN */
+  .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--azul); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--azul-oscuro); line-height: 1.2; margin-bottom: 0.75rem; }
+  .divider { width: 50px; height: 4px; background: linear-gradient(90deg, var(--azul), var(--teal)); border-radius: 2px; margin-bottom: 2rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+
+  .card { background: white; border-radius: 18px; padding: 1.75rem; box-shadow: 0 4px 20px var(--sombra); border-top: 4px solid var(--teal); transition: transform 0.25s; }
+  .card:hover { transform: translateY(-5px); }
+  .card-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--azul-oscuro); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.93rem; color: var(--gris); line-height: 1.6; }
+
+  /* PRECIO */
+  .precio-bg {
+    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .precio-card {
+    background: white;
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .precio-card .plan-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--azul-oscuro);
+    margin-bottom: 0.5rem;
+  }
+
+  .precio-card .plan-monto {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--azul);
+    line-height: 1;
+    margin: 1rem 0 0.25rem;
+  }
+
+  .precio-card .plan-periodo {
+    color: var(--gris);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .precio-incluye {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .precio-incluye li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f4f8;
+    font-size: 0.95rem;
+    color: var(--azul-oscuro);
+  }
+
+  .precio-incluye li .check { color: var(--teal); font-size: 1.1rem; }
+
+  .precio-cta {
+    display: block;
+    background: linear-gradient(135deg, var(--azul), var(--teal));
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(26,95,138,0.4);
+    transition: transform 0.2s;
+  }
+
+  .precio-cta:hover { transform: translateY(-2px); }
+
+  /* ESPECIALIDADES */
+  .esp-bg { background: linear-gradient(180deg, #eef4f9 0%, white 100%); padding: 4rem 1.5rem; }
+  .esp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto; }
+  .esp-item { background: white; border-radius: 14px; padding: 1.25rem 0.75rem; text-align: center; box-shadow: 0 2px 14px var(--sombra); transition: transform 0.2s; }
+  .esp-item:hover { transform: translateY(-4px); }
+  .esp-item .esp-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+  .esp-item p { font-size: 0.88rem; font-weight: 700; color: var(--azul-oscuro); }
+
+  /* CÓMO FUNCIONA */
+  .pasos { display: flex; flex-direction: column; gap: 1.25rem; }
+  .paso { display: flex; align-items: flex-start; gap: 1.25rem; background: white; border-radius: 14px; padding: 1.25rem; box-shadow: 0 2px 14px var(--sombra); }
+  .paso-num { width: 44px; height: 44px; background: linear-gradient(135deg, var(--azul), var(--teal)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.1rem; color: white; flex-shrink: 0; }
+  .paso-content h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--azul-oscuro); margin-bottom: 0.25rem; }
+  .paso-content p { font-size: 0.9rem; color: var(--gris); line-height: 1.6; }
+
+  .contacto-box { background: linear-gradient(135deg, #eef4f9, #dceef7); border-radius: 24px; padding: 2.5rem 2rem; text-align: center; }
+  .contacto-box .big-icon { font-size: 4rem; margin-bottom: 1rem; }
+  .contacto-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--azul-oscuro); margin-bottom: 0.5rem; }
+  .contacto-box p { color: var(--gris); margin-bottom: 1.5rem; line-height: 1.6; }
+  .contacto-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--azul); color: white; padding: 0.9rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: transform 0.2s; }
+  .contacto-btn:hover { transform: translateY(-2px); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* TESTIMONIO */
+  .test-bg { background: #f0f7f0; padding: 4rem 1.5rem; }
+  .test-card { background: white; border-radius: 20px; padding: 2.5rem; max-width: 680px; margin: 0 auto; box-shadow: 0 4px 24px var(--sombra); border-left: 6px solid var(--teal); }
+  .test-card blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-style: italic; color: var(--azul-oscuro); line-height: 1.7; margin-bottom: 1.25rem; }
+  .test-card cite { color: var(--azul); font-size: 0.9rem; font-weight: 700; }
+
+  /* FOOTER CTA */
+  .footer-cta { padding: 4rem 1.5rem; text-align: center; background: white; }
+
+  /* WHATSAPP FLOTANTE */
+  .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; }
+  .wa-btn { display: flex; align-items: center; gap: 0.6rem; background: #25D366; color: white; text-decoration: none; padding: 0.9rem 1.4rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; box-shadow: 0 6px 24px rgba(37,211,102,0.45); transition: transform 0.2s; white-space: nowrap; }
+  .wa-btn:hover { transform: translateY(-3px); }
+  @media (max-width: 480px) {
+    .wa-btn span.wa-text { display: none; }
+    .wa-btn { padding: 1rem; border-radius: 50%; width: 56px; height: 56px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏥 Santiago del Estero</div>
+  <div class="hero-icon">👨‍⚕️</div>
+  <h1>Tu médico siempre<br><span>a un mensaje de distancia</span></h1>
+  <p class="hero-subtitle">Consultas médicas, recetas electrónicas y turnos — todo por WhatsApp, sin salir de tu casa, sin esperas, sin complicaciones.</p>
+  <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 16px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; max-width: 520px;">
+    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">¿Cuánto gastás hoy sin este servicio?</p>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left; margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+        <span>🚗 Traslado al médico (ida y vuelta)</span>
+        <span>$8.000</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+        <span>👨‍⚕️ Consulta particular</span>
+        <span>$25.000</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+        <span>⏰ Horas de espera perdidas</span>
+        <span>$15.000+</span>
+      </div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 0.5rem; display: flex; justify-content: space-between; color: white; font-weight: 700; font-size: 1rem;">
+        <span>Total por consulta</span>
+        <span style="text-decoration: line-through; opacity: 0.7;">$48.000+</span>
+      </div>
+    </div>
+    <div style="background: rgba(42,184,196,0.3); border: 2px solid var(--teal); border-radius: 12px; padding: 0.75rem 1rem; text-align: center;">
+      <p style="color: rgba(255,255,255,0.8); font-size: 0.8rem; margin-bottom: 0.2rem;">🎯 PRECIO DE LANZAMIENTO — Este mes</p>
+      <p style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: white; line-height: 1;">$15.000 <span style="font-size: 1rem; font-weight: 400;">/ mes</span></p>
+      <p style="color: rgba(255,255,255,0.75); font-size: 0.8rem;">Consultas ilimitadas · Todo incluido</p>
+    </div>
+  </div>
+  <a href="https://wa.me/5493855923284" class="hero-cta">💬 Quiero afiliarme ahora</a>
+  <p class="hero-garantia">✅ Sin permanencia · Cancelá cuando quieras</p>
+</section>
+
+<!-- EL PROBLEMA -->
+<div class="problema-bg">
+  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    <p class="section-label">¿Te identificás con esto?</p>
+    <h2 class="section-title">Los problemas que resolvemos</h2>
+    <div class="problema-grid">
+      <div class="problema-item">
+        <div class="prob-icon">🚗</div>
+        <h3>El traslado es difícil</h3>
+        <p>Conseguir quien te lleve, el costo del taxi, el tiempo de espera en el consultorio.</p>
+      </div>
+      <div class="problema-item">
+        <div class="prob-icon">⏰</div>
+        <h3>Largas esperas</h3>
+        <p>Horas sentado esperando turno cuando ya tenés el cuerpo cansado o con dolor.</p>
+      </div>
+      <div class="problema-item">
+        <div class="prob-icon">📋</div>
+        <h3>La receta vencida</h3>
+        <p>Salir a buscar una receta para el mismo medicamento de siempre es una pérdida de tiempo.</p>
+      </div>
+      <div class="problema-item">
+        <div class="prob-icon">🌡️</div>
+        <h3>El clima extremo</h3>
+        <p>En Santiago del Estero, los 45 grados del verano hacen imposible salir a atenderse.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOLUCIÓN -->
+<div style="background: white; padding: 4rem 1.5rem;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-label">La solución</p>
+    <h2 class="section-title">Todo resuelto desde tu celular</h2>
+    <div class="divider"></div>
+    <div class="cards">
+      <div class="card"><div class="card-icon">🏠</div><h3>Sin salir de casa</h3><p>No necesitás transporte ni acompañante. Tu médico llega a vos por WhatsApp.</p></div>
+      <div class="card"><div class="card-icon">⚡</div><h3>Respuesta inmediata</h3><p>Sin sala de espera. En minutos tenés la atención que necesitás.</p></div>
+      <div class="card"><div class="card-icon">💊</div><h3>Receta electrónica</h3><p>Pedís la receta por WhatsApp y la recibís en tu celular. Sin moverse.</p></div>
+      <div class="card"><div class="card-icon">📱</div><h3>Solo tu celular</h3><p>Si sabés mandar un mensaje de WhatsApp, sabés usar Tu Médico en Casa.</p></div>
+      <div class="card"><div class="card-icon">👨‍⚕️</div><h3>Médicos reales</h3><p>Especialistas que te conocen, con acceso a tu historial en cada consulta.</p></div>
+      <div class="card"><div class="card-icon">📋</div><h3>Tu historial siempre disponible</h3><p>Medicación, consultas anteriores y seguimiento — todo guardado y accesible.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRECIO -->
+<div class="precio-bg">
+  <div style="max-width: 600px; margin: 0 auto; text-align: center; margin-bottom: 3rem;">
+    <p class="section-label" style="color: rgba(255,255,255,0.7);">Simple y accesible</p>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; margin-bottom: 0.5rem;">Un solo plan, todo incluido</h2>
+    <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">Sin sorpresas, sin letras chicas, sin límites de consultas.</p>
+  </div>
+  <div class="precio-card">
+    <p class="plan-nombre">Plan Mensual</p>
+    <div class="plan-monto">$15.000</div>
+    <p class="plan-periodo">por mes · Débito automático</p>
+    <ul class="precio-incluye">
+      <li><span class="check">✅</span> Consultas médicas ilimitadas</li>
+      <li><span class="check">✅</span> Recetas electrónicas incluidas</li>
+      <li><span class="check">✅</span> Turnos para videollamada</li>
+      <li><span class="check">✅</span> Turnos presenciales</li>
+      <li><span class="check">✅</span> Seguimiento de medicación</li>
+      <li><span class="check">✅</span> Atención las 24 horas</li>
+      <li><span class="check">✅</span> Sin permanencia mínima</li>
+    </ul>
+    <a href="https://wa.me/5493855923284" class="precio-cta">💬 Quiero afiliarme — Escribinos ahora</a>
+  </div>
+</div>
+
+<!-- ESPECIALIDADES -->
+<div class="esp-bg">
+  <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+    <p class="section-label">Nuestros profesionales</p>
+    <h2 class="section-title">Especialistas para cada necesidad</h2>
+    <div class="divider" style="margin: 0 auto 2rem;"></div>
+    <div class="esp-grid">
+      <div class="esp-item"><div class="esp-icon">❤️</div><p>Cardiología</p></div>
+      <div class="esp-item"><div class="esp-icon">🩺</div><p>Clínica Médica</p></div>
+      <div class="esp-item"><div class="esp-icon">🦴</div><p>Traumatología</p></div>
+      <div class="esp-item"><div class="esp-icon">👴</div><p>Gerontología</p></div>
+      <div class="esp-item"><div class="esp-icon">👶</div><p>Pediatría</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CÓMO FUNCIONA -->
+<div style="background: white; padding: 4rem 1.5rem;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Así de simple</p>
+        <h2 class="section-title">Empezás en 3 pasos</h2>
+        <div class="divider"></div>
+        <div class="pasos">
+          <div class="paso"><div class="paso-num">1</div><div class="paso-content"><h4>Escribinos por WhatsApp</h4><p>Mandanos un mensaje al 3855923284 y Clara te atiende al instante.</p></div></div>
+          <div class="paso"><div class="paso-num">2</div><div class="paso-content"><h4>Te afiliamos en minutos</h4><p>Sin papeles, sin trámites. Solo tu nombre, DNI y datos básicos.</p></div></div>
+          <div class="paso"><div class="paso-num">3</div><div class="paso-content"><h4>Empezá a consultar</h4><p>Desde ese momento tenés acceso a todos nuestros servicios médicos.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="contacto-box">
+          <div class="big-icon">📲</div>
+          <h3>¿Tenés dudas?</h3>
+          <p>Escribinos ahora mismo. Te explicamos todo sin compromiso y sin costo.</p>
+          <a href="https://wa.me/5493855923284" class="contacto-btn">💬 Escribinos ahora</a>
+          <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gris);">📞 3855923284 · Todos los días</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIO -->
+<div class="test-bg">
+  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    <p class="section-label">Lo que dicen nuestros pacientes</p>
+    <h2 class="section-title">Una atención que cambia la vida</h2>
+    <div class="divider" style="margin: 0 auto 2rem;"></div>
+    <div class="test-card">
+      <blockquote>"Tengo 72 años y vivía sola. Antes para ir al médico tenía que esperar que mi hijo me lleve, a veces tardaba días. Ahora escribo por WhatsApp y en minutos tengo respuesta. La receta me llega directo al celular. Es lo mejor que me pasó."</blockquote>
+      <cite>— Paciente afiliada, 72 años, Santiago del Estero</cite>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <p class="section-label">Empezá hoy</p>
+  <h2 class="section-title" style="max-width: 560px; margin: 0 auto 0.75rem;">Tu salud no puede esperar</h2>
+  <p style="font-size: 1.05rem; color: var(--gris); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7;">Por solo $15.000 al mes tenés un médico siempre disponible, sin salir de tu casa, sin esperas y sin complicaciones.</p>
+  <a href="https://wa.me/5493855923284" style="display:inline-flex;align-items:center;gap:0.75rem;background:var(--azul);color:white;font-weight:700;font-size:1.1rem;padding:1rem 2.2rem;border-radius:50px;text-decoration:none;box-shadow:0 8px 30px rgba(13,45,74,0.25);">💬 Quiero afiliarme — Es fácil</a>
+  <p style="margin-top: 1.5rem; color: var(--gris); font-size: 0.85rem;">📍 Santiago del Estero · 📞 3855923284 · Todos los días</p>
+</div>
+
+<!-- WHATSAPP FLOTANTE -->
+<div class="wa-float">
+  <a href="https://wa.me/5493855923284" class="wa-btn">
+    <span>💬</span>
+    <span class="wa-text">WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.card, .paso, .esp-item, .problema-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
